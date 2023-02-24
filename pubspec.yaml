@@ -1,0 +1,112 @@
+name: wm_commercial
+description: A new Flutter project.  
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+ 
+version: 1.1.0+1
+
+environment:
+  sdk: '>=2.19.2 <3.0.0'
+ 
+dependencies:
+  flutter:
+    sdk: flutter
+
+  flutter_localizations: # Add this line
+    sdk: flutter  # Add this line
+
+  get: ^4.6.5
+  intl: ^0.17.0 
+  badges: ^3.0.2
+  http: ^0.13.4 
+  dio: ^4.0.6
+  flutter_phoenix: ^1.1.0
+  get_storage: ^2.0.3 
+  provider: ^6.0.2
+  url_strategy: ^0.2.0
+  url_launcher: ^6.0.18
+  google_fonts: ^3.0.1
+  auto_size_text: ^3.0.0
+  animated_text_kit: ^4.2.1
+  syncfusion_flutter_charts: ^20.4.50
+  syncfusion_flutter_datagrid_export: ^20.4.50-beta
+  syncfusion_flutter_barcodes: ^20.4.50
+  syncfusion_flutter_calendar: ^20.4.50
+  syncfusion_flutter_pdfviewer: ^20.4.50
+  pluto_grid: ^5.4.0
+  timeago: ^3.2.2
+  simple_speed_dial: ^0.1.3 
+  date_time_picker: ^2.1.0
+  flutter_switch: ^0.3.2
+  flutter_staggered_grid_view: ^0.6.1
+  flash_card: ^0.0.7
+  pdf: ^3.8.0  
+  path_provider: ^2.0.10
+  path_provider_platform_interface: ^2.0.4
+  file_picker: ^5.2.3
+  extended_image: ^6.2.1
+  excel: ^2.0.0-null-safety-3 
+  easy_autocomplete: ^1.6.0
+  davi: ^3.2.0
+  flutter_slidable: ^2.0.0 
+  flutter_breadcrumb: ^1.0.1 
+  internet_connection_checker: ^1.0.0+1  # sauf le Web
+  flutter_quill: ^6.3.5  # sauf le android
+  # flutter_secure_storage: ^7.0.1
+  ffi: ^2.0.1
+  open_app_file: ^4.0.1
+  cached_network_image_builder: ^0.2.0
+  printing: ^5.9.3
+  sembast: ^3.4.0+6
+  sembast_sqflite: ^2.1.0+1
+  dash_chat: ^1.1.16 
+  flutter_esc_pos_utils: ^0.1.8
+
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  
+  flutter_lints: ^2.0.0
+  msix: ^3.6.4
+
+ 
+# The following section is specific to Flutter packages.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/images/
+  #   - images/a_dot_ham.jpeg
+
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Regular.ttf
+        - asset: assets/fonts/Poppins-Italic.ttf
+          style: italic  
+
+msix_config:
+  display_name: WM Commercial
+  publisher_display_name: WM_Commercial
+  identity_name: com.eventdrcTechnology.WorkManagement
+  msix_version: 1.1.0.0
+  certificate_path: C:\Users\K-GERMANDO\Documents\DEVELOPER\FLUTTER\CERTIFICAT\wm_commercial_certifat\CERTIFICATE.pfx
+  certificate_password: tMvBcb4KGAIX9xIF
+  publisher: CN=Germain kataku, O=Eventdrc Technology
+  logo_path: C:\Users\K-GERMANDO\Documents\DEVELOPER\FLUTTER\PROJECT\wm_commercial\assets\images\logo_fond.png
+  start_menu_icon_path: C:\Users\K-GERMANDO\Documents\DEVELOPER\FLUTTER\PROJECT\wm_commercial\assets\images\logo_fond.png
+  tile_icon_path: C:\Users\K-GERMANDO\Documents\DEVELOPER\FLUTTER\PROJECT\wm_commercial\assets\images\logo_fond.png
+  # vs_generated_images_folder_path: C:\<PathToFolder>\icons
+  icons_background_color: '#ffffff'
+  architecture: x64
+  capabilities: 'internetClient,location,microphone,webcam'
