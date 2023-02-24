@@ -96,8 +96,8 @@ flutter:
           style: italic  
 
 msix_config:
-  display_name: WM Commercial
-  publisher_display_name: WM_Commercial
+  display_name: WM Com Ivanna
+  publisher_display_name: WM_Com_Ivanna
   identity_name: com.eventdrcTechnology.WorkManagement
   msix_version: 1.1.0.0
   certificate_path: C:\Users\K-GERMANDO\Documents\DEVELOPER\FLUTTER\CERTIFICAT\wm_commercial_certifat\CERTIFICATE.pfx
