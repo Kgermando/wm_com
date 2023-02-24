@@ -16,7 +16,7 @@ import 'package:wm_commercial/src/utils/service_affectation.dart';
 
 class PersonnelsController extends GetxController
     with StateMixin<List<AgentModel>> {
-  PersonnelsApi personnelsApi = PersonnelsApi();
+  PersonnelsApi personnelsApi = PersonnelsApi(); 
   final ProfilController profilController = Get.find();
 
   var personnelsList = <AgentModel>[].obs;

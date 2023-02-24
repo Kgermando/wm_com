@@ -42,9 +42,7 @@ class _CourbeVenteGainDayState extends State<CourbeVenteGainDay> {
                 textStyle: bodyMedium!.copyWith(fontWeight: FontWeight.bold)),
             // Enable legend
             legend: Legend(
-                position: Responsive.isDesktop(context)
-                    ? LegendPosition.right
-                    : LegendPosition.bottom,
+                position: LegendPosition.bottom,
                 isVisible: true),
             // Enable tooltip
             palette: const [

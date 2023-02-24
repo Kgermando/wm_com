@@ -59,8 +59,7 @@ class _CartPageState extends State<CartPage> {
                       controller: ScrollController(),
                       physics: const ScrollPhysics(),
                       child: Container(
-                        margin: const EdgeInsets.only(
-                            top: p20, bottom: p8),
+                        margin: const EdgeInsets.only(top: p20, bottom: p8),
                         decoration: const BoxDecoration(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(20))),
@@ -72,15 +71,16 @@ class _CartPageState extends State<CartPage> {
                                 const TitleWidget(title: 'Panier'),
                                 IconButton(
                                     onPressed: () {
+                                      // Navigator.pushNamed(
+                                      //     context, ComRoutes.comCart);
+                                      Get.toNamed(ComRoutes.comCart);
                                       controller.getList();
-                                      Navigator.pushNamed(
-                                          context, ComRoutes.comCart);
                                     },
                                     icon: const Icon(Icons.refresh,
                                         color: Colors.green))
                               ],
                             ),
-                            Obx(() =>  ListView.builder(
+                            Obx(() => ListView.builder(
                                 shrinkWrap: true,
                                 itemCount: state!.length,
                                 itemBuilder: (context, index) {
@@ -88,8 +88,8 @@ class _CartPageState extends State<CartPage> {
                                   return CartItemWidget(
                                       cart: cart, controller: controller);
                                 })),
-                            Obx(() => SizedBox(height: p50, child: totalCart(controller)))
-                            
+                            Obx(() => SizedBox(
+                                height: p50, child: totalCart(controller)))
                           ],
                         ),
                       ))))
@@ -445,54 +445,59 @@ class _CartPageState extends State<CartPage> {
         .toList();
     return Container(
       margin: const EdgeInsets.only(bottom: 20.0),
-      child: ardoiseController.isLoading ? loading() : DropdownButtonFormField<String>(
-        decoration: InputDecoration(
-          labelText: 'Selectionner la Table',
-          labelStyle: const TextStyle(),
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0)),
-          contentPadding: const EdgeInsets.only(left: 5.0),
-        ),
-        value: ardoiseController.table,
-        isExpanded: true,
-        items: dataList.map((String value) {
-          return DropdownMenuItem<String>(
-            value: value,
-            child: Text(value),
-          );
-        }).toList(),
-        onChanged: (value) {
-          setState(() {
-            ardoiseController.table = value;
-            if (ardoiseController.table != null) {
-              List<CartModel> cartList = [];
-              ArdoiseModel ardoise = ardoiseController.ardoiseList
-                  .where((p0) => p0.ardoise == ardoiseController.table)
-                  .first; 
+      child: ardoiseController.isLoading
+          ? loading()
+          : DropdownButtonFormField<String>(
+              decoration: InputDecoration(
+                labelText: 'Selectionner la Table',
+                labelStyle: const TextStyle(),
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5.0)),
+                contentPadding: const EdgeInsets.only(left: 5.0),
+              ),
+              value: ardoiseController.table,
+              isExpanded: true,
+              items: dataList.map((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+              onChanged: (value) {
+                setState(() {
+                  ardoiseController.table = value;
+                  if (ardoiseController.table != null) {
+                    List<CartModel> cartList = [];
+                    ArdoiseModel ardoise = ardoiseController.ardoiseList
+                        .where((p0) => p0.ardoise == ardoiseController.table)
+                        .first;
 
-              if (ardoise.ardoiseJson != "") {
-                List<dynamic> ardoiseJson = jsonDecode(ardoise.ardoiseJson);
-                List<CartModel> cartItemList = [];
-                for (var element in ardoiseJson) {
-                  cartItemList.add(CartModel.fromJson(element));
-                }
+                    if (ardoise.ardoiseJson != "") {
+                      List<dynamic> ardoiseJson =
+                          jsonDecode(ardoise.ardoiseJson);
+                      List<CartModel> cartItemList = [];
+                      for (var element in ardoiseJson) {
+                        cartItemList.add(CartModel.fromJson(element));
+                      }
 
-                for (var element in cartItemList) {
-                  cartList.add(element);
-                } 
+                      for (var element in cartItemList) {
+                        cartList.add(element);
+                      }
 
-                for (var cart in controller.cartList) {
-                  cartList.add(cart);
-                } 
-                ardoiseController.tableInsertData(ardoise, cartList);
-                // Navigator.pop(context);
-              } else { 
-                ardoiseController.tableInsertData(ardoise, controller.cartList);
-                // Navigator.pop(context);
-              }
-            }
-          });
-        },
-      ),
+                      for (var cart in controller.cartList) {
+                        cartList.add(cart);
+                      }
+                      ardoiseController.tableInsertData(ardoise, cartList);
+                      // Navigator.pop(context);
+                    } else {
+                      ardoiseController.tableInsertData(
+                          ardoise, controller.cartList);
+                      // Navigator.pop(context);
+                    }
+                  }
+                });
+              },
+            ),
     );
   }
 }

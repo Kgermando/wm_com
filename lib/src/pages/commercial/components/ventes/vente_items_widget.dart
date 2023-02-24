@@ -61,10 +61,6 @@ class _VenteItemWidgetState extends State<VenteItemWidget> {
     super.dispose();
   }
 
-  void clear() {
-    quantityCartController.clear(); 
-  }
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -193,9 +189,7 @@ class _VenteItemWidgetState extends State<VenteItemWidget> {
   }
 
   Widget qtyField() {
-    return Obx(() => widget.cartController.isLoading
-        ? loadingMini()
-        : SizedBox(
+    return SizedBox(
             width: Responsive.isDesktop(context) ? 100 : 50,
             height: 40,
             child: TextFormField(
@@ -229,18 +223,8 @@ class _VenteItemWidgetState extends State<VenteItemWidget> {
                   return null;
                 }
               },
-              // onChanged: (value) {
-              //   setState(() {
-              //     // widget.cartController.controllerQuantityCart = value;
-              //     // print("qty cart ${widget.cartController.controllerQuantityCart}");
-              //   });
-              // },
-              // onSaved: (String? value) {
-              //   // debugPrint('Value for field $index saved as "$value"');
-              //   widget.cartController.controllerQuantityCart = value;
-              // },
             ),
-          ));
+          );
   }
 
   Widget onChanged() {

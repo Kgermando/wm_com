@@ -70,11 +70,19 @@ class CartController extends GetxController with StateMixin<List<CartModel>> {
   TextEditingController delaiPaiementAcreditController =
       TextEditingController();
 
+
   @override
   void onInit() {
     super.onInit();
     getList();
   }
+
+  @override
+  void refresh() {
+    getList();
+    super.refresh();
+  }
+
 
   @override
   void dispose() {
@@ -101,6 +109,8 @@ class CartController extends GetxController with StateMixin<List<CartModel>> {
     addresseAcreditController.clear();
     delaiPaiementAcreditController.clear();
   }
+
+
 
   void getList() async {
     cartList.clear();

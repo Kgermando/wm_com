@@ -4,7 +4,6 @@ import 'package:wm_commercial/src/controllers/departement_notify_controller.dart
 import 'package:wm_commercial/src/controllers/network_controller.dart';
 import 'package:wm_commercial/src/pages/auth/controller/login_controller.dart';
 import 'package:wm_commercial/src/pages/auth/controller/profil_controller.dart';
-import 'package:wm_commercial/src/pages/rh/controller/personnels_controller.dart';
 import 'package:wm_commercial/src/pages/rh/controller/user_actif_controller.dart';
 // import 'package:wm_commercial/src/pages/actionnaire/controller/actionnaire_controller.dart';
 // import 'package:wm_commercial/src/pages/actionnaire/controller/actionnaire_cotisation_controller.dart';
@@ -103,9 +102,10 @@ class WMBindings extends Bindings {
     String? idToken = getStorge.read(InfoSystem.keyIdToken);
     if (idToken != null) {
       Get.put<ProfilController>(ProfilController());
-      Get.lazyPut(() => DepartementNotifyCOntroller());
-      Get.lazyPut(() => PersonnelsController()); 
-      Get.lazyPut(() => UsersController()); 
+      Get.lazyPut(() => DepartementNotifyCOntroller()); 
+      Get.put<DepartementNotifyCOntroller>(DepartementNotifyCOntroller());
+      Get.put<UsersController>(UsersController());
+      
     }
     Get.put<LoginController>(LoginController());
     Get.put<NetworkController>(NetworkController());

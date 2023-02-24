@@ -5,7 +5,7 @@ import 'package:wm_commercial/src/pages/rh/controller/personnels_controller.dart
 import 'package:wm_commercial/src/constants/app_theme.dart';
 import 'package:wm_commercial/src/constants/responsive.dart';
 import 'package:wm_commercial/src/navigation/drawer/drawer_menu.dart';
-import 'package:wm_commercial/src/navigation/header/header_bar.dart';
+import 'package:wm_commercial/src/navigation/header/header_bar.dart'; 
 import 'package:wm_commercial/src/routes/routes.dart';
 import 'package:wm_commercial/src/widgets/loading.dart';
 
@@ -13,7 +13,7 @@ class PersonnelPage extends GetView<PersonnelsController> {
   const PersonnelPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { 
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
     String title = "Ressources Humaines";
     String subTitle = "Personnels";

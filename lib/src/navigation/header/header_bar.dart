@@ -5,8 +5,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_breadcrumb/flutter_breadcrumb.dart';
 import 'package:get/get.dart';
-import 'package:wm_commercial/src/constants/app_theme.dart';
-import 'package:wm_commercial/src/constants/reponsiveness.dart';
+import 'package:wm_commercial/src/constants/app_theme.dart'; 
 import 'package:wm_commercial/src/constants/responsive.dart';
 import 'package:wm_commercial/src/constants/style.dart';
 import 'package:wm_commercial/src/controllers/departement_notify_controller.dart';
@@ -32,7 +31,7 @@ AppBar headerBar(BuildContext context, GlobalKey<ScaffoldState> scaffoldKey,
 
   return AppBar(
     leadingWidth: 100,
-    leading: !ResponsiveWidget.isSmallScreen(context)
+    leading: Responsive.isDesktop(context)
         ? Image.asset(
             InfoSystem().logoIcon(),
             width: 20,

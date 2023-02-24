@@ -121,99 +121,9 @@ class _ViewPersonneState extends State<ViewPersonne> {
     return Padding(
       padding: const EdgeInsets.all(p10),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Responsive.isMobile(context)
-              ? Column(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            SizedBox(
-                              height: 80,
-                              width: 80,
-                              child: SfBarcodeGenerator(
-                                value: widget.personne.matricule,
-                                symbology: QRCode(),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text('Statut personnel : ',
-                                textAlign: TextAlign.start,
-                                style: bodyMedium!
-                                    .copyWith(fontWeight: FontWeight.bold)),
-                            if (widget.personne.statutAgent == 'Actif')
-                              Obx(() => Text(widget.personne.statutAgent,
-                                  textAlign: TextAlign.start,
-                                  style: bodyMedium.copyWith(
-                                      color: Colors.green.shade700))),
-                            if (widget.personne.statutAgent == 'Inactif')
-                              Obx(() => Text(widget.personne.statutAgent,
-                                  textAlign: TextAlign.start,
-                                  style: bodyMedium.copyWith(
-                                      color: Colors.orange.shade700)))
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(
-                                "Créé le. ${DateFormat("dd-MM-yyyy HH:mm").format(widget.personne.createdAt)}",
-                                textAlign: TextAlign.start,
-                                style: bodyMedium),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(
-                                "Mise à jour le. ${DateFormat("dd-MM-yyyy HH:mm").format(widget.personne.created)}",
-                                textAlign: TextAlign.start,
-                                style: bodyMedium),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: p20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        CircleAvatar(
-                          radius: 55,
-                          backgroundColor: mainColor,
-                          child: ClipOval(
-                            child: CachedNetworkImageBuilder(
-                              url: widget.personne.photo!,
-                              builder: (image) {
-                                return Center(
-                                    child: Image.file(
-                                  image,
-                                  width: 150,
-                                  height: 150,
-                                  fit: BoxFit.cover,
-                                ));
-                              },
-                              // Optional Placeholder widget until image loaded from url
-                              placeHolder: Center(child: loading()),
-                              // Optional error widget
-                              errorWidget:
-                                  Image.asset('assets/images/avatar.jpg'),
-                              // Optional describe your image extensions default values are; jpg, jpeg, gif and png
-                              imageExtensions: const ['jpg', 'png'],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                )
-              : Row(
+          Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     CircleAvatar(
@@ -224,10 +134,10 @@ class _ViewPersonneState extends State<ViewPersonne> {
                             url: widget.personne.photo!,
                             builder: (image) {
                               return Center(
-                                  child: Image.file(
+                              child: Image.file(
                                 image,
-                                width: 150,
-                                height: 150,
+                                width: Responsive.isDesktop(context) ? 150 : 100,
+                                height: Responsive.isDesktop(context) ? 150 : 100,
                                 fit: BoxFit.cover,
                               ));
                             },
@@ -235,14 +145,17 @@ class _ViewPersonneState extends State<ViewPersonne> {
                             placeHolder: Center(child: loading()),
                             // Optional error widget
                             errorWidget:
-                                Image.asset('assets/images/avatar.jpg'),
+                              Image.asset(
+                                width: Responsive.isDesktop(context) ? 150 : 100,
+                                height: Responsive.isDesktop(context) ? 150 : 100,
+                                  'assets/images/avatar.jpg'),
                             // Optional describe your image extensions default values are; jpg, jpeg, gif and png
                             imageExtensions: const ['jpg', 'png'],
                           )
                       ),
                     ),
                     Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
@@ -264,14 +177,12 @@ class _ViewPersonneState extends State<ViewPersonne> {
                                 textAlign: TextAlign.start,
                                 style: bodyMedium!
                                     .copyWith(fontWeight: FontWeight.bold)),
-                            if (widget.personne.statutAgent == 'Actif')
-                              // Obx(() => ),
+                            if (widget.personne.statutAgent == 'Actif') 
                               Text(widget.personne.statutAgent,
                                   textAlign: TextAlign.start,
                                   style: bodyMedium.copyWith(
                                       color: Colors.green.shade700)),
-                            if (widget.personne.statutAgent == 'Inactif')
-                              // Obx(() => )
+                            if (widget.personne.statutAgent == 'Inactif') 
                               Text(widget.personne.statutAgent,
                                   textAlign: TextAlign.start,
                                   style: bodyMedium.copyWith(
@@ -381,6 +292,7 @@ class _ViewPersonneState extends State<ViewPersonne> {
     return Padding(
       padding: const EdgeInsets.all(p10),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ResponsiveChildWidget(
               child1: Text('Type de Contrat :',

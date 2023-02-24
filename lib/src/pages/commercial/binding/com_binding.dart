@@ -15,7 +15,9 @@ import 'package:wm_commercial/src/pages/commercial/controller/history/history_ra
 import 'package:wm_commercial/src/pages/commercial/controller/history/history_vente_controller.dart';
 import 'package:wm_commercial/src/pages/commercial/controller/produit_model/produit_model_controller.dart';
 import 'package:wm_commercial/src/pages/commercial/controller/vente_effectue/ventes_effectue_controller.dart';
-import 'package:wm_commercial/src/pages/finance/controller/caisses/caisse_controller.dart'; 
+import 'package:wm_commercial/src/pages/finance/controller/caisses/caisse_controller.dart';
+import 'package:wm_commercial/src/pages/rh/controller/personnels_controller.dart';
+import 'package:wm_commercial/src/pages/rh/controller/user_actif_controller.dart'; 
 
 class ComBinding extends Bindings {
   @override
@@ -42,5 +44,9 @@ class ComBinding extends Bindings {
 
     // Finance
     Get.put<CaisseController>(CaisseController());
+
+    // RH
+    Get.put<PersonnelsController>(PersonnelsController());
+    Get.put<UsersController>(UsersController());
   }
 }
