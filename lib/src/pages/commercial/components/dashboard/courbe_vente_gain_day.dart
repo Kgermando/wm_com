@@ -35,8 +35,7 @@ class _CourbeVenteGainDayState extends State<CourbeVenteGainDay> {
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(p8),
-        child: SfCartesianChart(
-            primaryXAxis: CategoryAxis(),
+        child: SfCartesianChart( 
             // Chart title
             title: ChartTitle(
                 text: 'Courbe de Ventes journalières',
@@ -54,12 +53,19 @@ class _CourbeVenteGainDayState extends State<CourbeVenteGainDay> {
               Color.fromRGBO(244, 67, 54, 1)
             ],
             tooltipBehavior: _tooltipBehavior,
+            primaryXAxis: CategoryAxis(
+                isVisible: Responsive.isDesktop(context) ? true : false),
             primaryYAxis: NumericAxis(
               edgeLabelPlacement: EdgeLabelPlacement.shift,
-              title: AxisTitle(
-                  text: DateFormat("dd-MM-yyyy").format(DateTime.now())),
-              numberFormat: NumberFormat.currency(
-                  symbol: '${widget.monnaieStorage.monney} ', decimalDigits: 1),
+              title: Responsive.isDesktop(context)
+                  ? AxisTitle(
+                      text: DateFormat("MM-yyyy").format(DateTime.now()))
+                  : AxisTitle(),
+              numberFormat: Responsive.isDesktop(context)
+                  ? NumberFormat.currency(
+                      symbol: '${widget.monnaieStorage.monney} ',
+                      decimalDigits: 1)
+                  : NumberFormat.compactCurrency(symbol: ''),
             ),
             series: <LineSeries>[
               LineSeries<CourbeVenteModel, String>(

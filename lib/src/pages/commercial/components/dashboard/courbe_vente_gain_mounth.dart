@@ -36,7 +36,8 @@ class _CourbeVenteGainMounthState extends State<CourbeVenteGainMounth> {
       child: Padding(
         padding: const EdgeInsets.all(p8),
         child: SfCartesianChart(
-            primaryXAxis: CategoryAxis(),
+            primaryXAxis: CategoryAxis(
+                isVisible: Responsive.isDesktop(context) ? true : false),
             // Chart title
             title: ChartTitle(
                 text: 'Courbe de Ventes mensuelles',
@@ -56,10 +57,13 @@ class _CourbeVenteGainMounthState extends State<CourbeVenteGainMounth> {
             tooltipBehavior: _tooltipBehavior,
             primaryYAxis: NumericAxis(
               edgeLabelPlacement: EdgeLabelPlacement.shift,
-              title:
-                  AxisTitle(text: DateFormat("MM-yyyy").format(DateTime.now())),
-              numberFormat: NumberFormat.currency(
-                  symbol: '${widget.monnaieStorage.monney} ', decimalDigits: 1),
+              title: Responsive.isDesktop(context) ? 
+                  AxisTitle(text:
+                   DateFormat("MM-yyyy").format(DateTime.now())) : AxisTitle(),
+              numberFormat: Responsive.isDesktop(context)
+                ? NumberFormat.currency(
+                  symbol: '${widget.monnaieStorage.monney} ', decimalDigits: 1)  
+                : NumberFormat.compactCurrency(symbol: ''),
             ),
             series: <LineSeries>[
               LineSeries<CourbeVenteModel, String>(

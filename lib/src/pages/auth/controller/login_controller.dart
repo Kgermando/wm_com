@@ -131,7 +131,7 @@ class LoginController extends GetxController {
             Get.lazyPut(() => UpdateController());
 
             GetStorage box = GetStorage();
-            String? idToken = box.read('idToken');
+            String? idToken = box.read(InfoSystem.keyIdToken);
 
             if (idToken != null) {
               await authApi.getUserId().then((userData) async {

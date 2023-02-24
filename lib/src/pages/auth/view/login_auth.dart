@@ -14,73 +14,75 @@ class LoginAuth extends GetView<LoginController> {
   Widget build(BuildContext context) {
     final headlineMedium = Theme.of(context).textTheme.headlineMedium;
     return Scaffold(
-      body: Center(
-        child: Container(
-          constraints: const BoxConstraints(maxWidth: 400),
-          padding: const EdgeInsets.all(24),
-          child: Form(
-            key: controller.loginFormKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: p10),
-                      child: Image.asset(InfoSystem().logo(), height: 150),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                Row(
-                  children: [
-                    Text("Login",
-                        style: headlineMedium!
-                            .copyWith(fontWeight: FontWeight.bold)),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  children: [
-                    Expanded(
-                      child: CustomText(
-                        text:
-                            "Bienvenue sur l'interface ${InfoSystem().name()}.",
-                        color: lightGrey,
+      body: Card(
+        child: Center(
+          child: Container(
+            constraints: const BoxConstraints(maxWidth: 400),
+            padding: const EdgeInsets.all(24),
+            child: Form(
+              key: controller.loginFormKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: p10),
+                        child: Image.asset(InfoSystem().logo(), height: 150),
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: p16,
-                ),
-                matriculeBuild(),
-                passwordBuild(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    TextButton(
-                        onPressed: () {},
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  Row(
+                    children: [
+                      Text("Login",
+                          style: headlineMedium!
+                              .copyWith(fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      Expanded(
                         child: CustomText(
-                            text: "Mot de passe oublié ?", color: mainColor))
-                  ],
-                ),
-                const SizedBox(
-                  height: p16,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(child: btnBuilder(context)),
-                  ],
-                ),
-                const SizedBox(
-                  height: p16,
-                ),
-              ],
+                          text:
+                              "Bienvenue sur l'interface ${InfoSystem().name()}.",
+                          color: lightGrey,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: p16,
+                  ),
+                  matriculeBuild(),
+                  passwordBuild(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton(
+                          onPressed: () {},
+                          child: CustomText(
+                              text: "Mot de passe oublié ?", color: mainColor))
+                    ],
+                  ),
+                  const SizedBox(
+                    height: p16,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(child: btnBuilder(context)),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: p16,
+                  ),
+                ],
+              ),
             ),
           ),
         ),

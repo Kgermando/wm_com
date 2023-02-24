@@ -38,21 +38,11 @@ AppBar headerBar(BuildContext context, GlobalKey<ScaffoldState> scaffoldKey,
             width: 20,
             height: 20,
           )
-        : Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              IconButton(
-                  icon: const Icon(Icons.menu),
-                  onPressed: () {
-                    scaffoldKey.currentState!.openDrawer();
-                  }),
-              IconButton(
-                  onPressed: () {
-                    Get.back();
-                  },
-                  icon: const Icon(Icons.arrow_back))
-            ],
-          ),
+        : IconButton(
+            icon: const Icon(Icons.menu),
+            onPressed: () {
+              scaffoldKey.currentState!.openDrawer();
+            }),
     title: Responsive.isMobile(context)
         ? Container()
         : InkWell(
@@ -174,9 +164,11 @@ AppBar headerBar(BuildContext context, GlobalKey<ScaffoldState> scaffoldKey,
                   child: AutoSizeText(
                     '$firstLettter$firstLettter2'.toUpperCase(),
                     maxLines: 1,
+                    style: (Responsive.isMobile(context)) ? const TextStyle(fontSize: p8) : const TextStyle(fontSize: p16),
                   ),
                 )),
-            const SizedBox(width: p8),
+              if (Responsive.isDesktop(context))
+             const SizedBox(width: p8),
             if (Responsive.isDesktop(context))
               InkWell(
                 onTap: () {

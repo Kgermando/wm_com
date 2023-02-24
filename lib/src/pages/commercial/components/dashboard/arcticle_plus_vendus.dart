@@ -29,17 +29,17 @@ class _ArticlePlusVendusState extends State<ArticlePlusVendus> {
   Widget build(BuildContext context) {
     final bodyMedium = Theme.of(context).textTheme.bodyMedium;
     return SizedBox(
-      height: MediaQuery.of(context).size.height / 3,
+      height: (Responsive.isDesktop(context)) ? 400 : 300,
       child: Card(
         child: SfCartesianChart(
           title: ChartTitle(
               text: 'Produits les plus vendus',
               textStyle: bodyMedium!.copyWith(fontWeight: FontWeight.bold)),
-          legend: Legend(
-              position: Responsive.isDesktop(context)
-                  ? LegendPosition.right
-                  : LegendPosition.bottom,
-              isVisible: true),
+          // legend: Legend(
+          //     position: Responsive.isDesktop(context)
+          //         ? LegendPosition.right
+          //         : LegendPosition.bottom,
+          //     isVisible: true),
           tooltipBehavior: _tooltipBehavior,
           series: <ChartSeries>[
             // VenteChartModel
@@ -54,7 +54,7 @@ class _ArticlePlusVendusState extends State<ArticlePlusVendus> {
                 dataLabelSettings: const DataLabelSettings(isVisible: true),
                 enableTooltip: true)
           ],
-          primaryXAxis: CategoryAxis(isVisible: true),
+          primaryXAxis: CategoryAxis(isVisible: Responsive.isDesktop(context) ? true : false),
           primaryYAxis: NumericAxis(
             edgeLabelPlacement: EdgeLabelPlacement.shift,
             title: AxisTitle(text: '10 produits les plus vendus'),
