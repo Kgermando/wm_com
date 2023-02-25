@@ -76,6 +76,16 @@ class DrawerMenu extends GetView<DepartementNotifyCOntroller> {
                 Get.toNamed(RhRoutes.rhPersonnelsPage);
               }),
            if (userRole <= 3)
+            DrawerWidget(
+                selected: currentRoute == RhRoutes.rhUserActif,
+                icon: Icons.group,
+                sizeIcon: 20.0,
+                title: 'Personnels Actifs',
+                style: bodyMedium,
+                onTap: () {
+                  Get.toNamed(RhRoutes.rhUserActif);
+                }),
+          if (userRole <= 3)
           DrawerWidget(
               selected: currentRoute == ArchiveRoutes.archivesFolder,
               icon: Icons.archive,

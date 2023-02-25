@@ -49,33 +49,40 @@ class _DetailPersonneState extends State<DetailPersonne> {
               child: const Expanded(flex: 1, child: DrawerMenu())),
           Expanded(
               flex: 5,
-              child: DefaultTabController(
-                  length: 2,
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 30,
-                        child: TabBar(
-                          physics: ScrollPhysics(),
-                          tabs: [Tab(text: "Profil"), Tab(text: "Utilisateurs actifs")],
-                        ),
-                      ),
-                      Expanded(
-                        child: TabBarView(
-                          physics: const ScrollPhysics(),
-                          children: [
-                            SingleChildScrollView(
-                                child: ViewPersonne(
-                                    personne: widget.personne,
-                                    controller: personnelsController,
-                                    usersController: usersController)),
-                            Expanded(
-                                child: InfosPersonne(personne: widget.personne))
-                          ],
-                        ),
-                      ),
-                    ],
-                  )))
+              child: SingleChildScrollView(
+                controller: ScrollController(),
+                physics: const ScrollPhysics(),
+                child: ViewPersonne(
+                  personne: widget.personne,
+                  controller: personnelsController,
+                  usersController: usersController)
+              ) 
+              
+              // DefaultTabController(
+              //     length: 2,
+              //     child: Column(
+              //       children: [
+              //         const SizedBox(
+              //           height: 30,
+              //           child: TabBar(
+              //             physics: ScrollPhysics(),
+              //             tabs: [Tab(text: "Profil"), Tab(text: "Utilisateurs actifs")],
+              //           ),
+              //         ),
+              //         Expanded(
+              //           child: TabBarView(
+              //             physics: const ScrollPhysics(),
+              //             children: [
+              //               SingleChildScrollView(
+              //                   child: ),
+              //               Expanded(
+              //                   child: InfosPersonne(personne: widget.personne))
+              //             ],
+              //           ),
+              //         ),
+              //       ],
+              //     ))
+          )
         ],
       ),
     );

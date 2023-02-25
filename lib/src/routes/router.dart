@@ -86,7 +86,8 @@ import 'package:wm_commercial/src/pages/rh/components/add_personnel.dart';
 import 'package:wm_commercial/src/pages/rh/components/detail._user.dart';
 import 'package:wm_commercial/src/pages/rh/components/detail_personne.dart';
 import 'package:wm_commercial/src/pages/rh/components/update_personnel.dart';
-import 'package:wm_commercial/src/pages/rh/view/personnel_page.dart';  
+import 'package:wm_commercial/src/pages/rh/view/personnel_page.dart';
+import 'package:wm_commercial/src/pages/rh/view/users_page.dart';  
 import 'package:wm_commercial/src/pages/screens/binding/setting_binfing.dart';
 import 'package:wm_commercial/src/pages/screens/components/settings/monnaie_page.dart';
 import 'package:wm_commercial/src/pages/screens/help_page.dart';
@@ -573,7 +574,7 @@ List<GetPage<dynamic>>? getPages = [
   GetPage(
       name: RhRoutes.rhUserActif,
       binding: PersonnelBinding(),
-      page: () => const PersonnelPage(),
+      page: () => const UserPage(), 
       transition: Transition.cupertino,
       transitionDuration: const Duration(seconds: 1)),
   GetPage(
