@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart'; 
+import 'package:get/get.dart';
 import 'package:wm_commercial/src/api/commerciale/vente_cart_api.dart';
 import 'package:wm_commercial/src/models/commercial/vente_cart_model.dart';
 
@@ -24,11 +24,10 @@ class VenteEffectueController extends GetxController
     super.refresh();
   }
 
-
-
   void getList() async {
     venteCartList.clear();
-    await venteCartApi.getAllData().then((response) { 
+    await venteCartApi.getAllData().then((response) {
+      venteCartList.clear();
       venteCartList.addAll(response);
       venteCartList.refresh();
       change(venteCartList, status: RxStatus.success());
@@ -45,7 +44,7 @@ class VenteEffectueController extends GetxController
   void deleteData(int id) async {
     try {
       _isLoading.value = true;
-      await venteCartApi.deleteData(id).then((value) { 
+      await venteCartApi.deleteData(id).then((value) {
         getList();
         Get.back();
         Get.snackbar("Supprimé avec succès!", "Cet élément a bien été supprimé",

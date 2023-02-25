@@ -15,7 +15,7 @@ class MailNav extends GetView<DepartementNotifyCOntroller> {
   Widget build(BuildContext context) {
     final bodySmall = Theme.of(context).textTheme.bodySmall;
     String? pageCurrente = ModalRoute.of(context)!.settings.name;
-    final ProfilController profilController = ProfilController(); 
+    final ProfilController profilController = ProfilController();
     return Drawer(
       backgroundColor: Colors.amber[50],
       // width: 150,
@@ -29,8 +29,8 @@ class MailNav extends GetView<DepartementNotifyCOntroller> {
               title: 'Menu',
               style: bodySmall!,
               onTap: () {
-                var departement = jsonDecode(profilController.user.departement);
-                if (departement.first == "Commercial") {
+                // var departement = jsonDecode(profilController.user.departement);
+                if (profilController.user.departement == "Commercial") {
                   if (int.parse(profilController.user.role) <= 2) {
                     Get.offAndToNamed(ComRoutes.comDashboard);
                   } else {

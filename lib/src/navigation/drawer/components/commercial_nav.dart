@@ -16,7 +16,7 @@ class CommercialNav extends StatefulWidget {
       required this.controller});
   final String currentRoute;
   final UserModel user;
-  final List<dynamic> departementList;
+  final String departementList;
   final DepartementNotifyCOntroller controller;
 
   @override
@@ -38,7 +38,7 @@ class _CommercialNavState extends State<CommercialNav> {
       leading: const Icon(Icons.store, size: 30.0),
       title: AutoSizeText('Commercial', maxLines: 1, style: bodyMedium),
       initiallyExpanded:
-          widget.departementList.contains('Commercial') ? true : false,
+         ( widget.departementList == 'Commercial') ? true : false,
       onExpansionChanged: (val) {
         setState(() {
           isOpen = !val;

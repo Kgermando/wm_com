@@ -136,8 +136,8 @@ class LoginController extends GetxController {
             if (idToken != null) {
               await authApi.getUserId().then((userData) async {
                 box.write('userModel', json.encode(userData));
-                var departement = jsonDecode(userData.departement);
-                if (departement.first == "Commercial") {
+                // var departement = jsonDecode(userData.departement);
+                if (userData.departement == "Commercial") {
                   if (int.parse(userData.role) <= 2) {
                     Get.offAndToNamed(ComRoutes.comDashboard);
                   } else {

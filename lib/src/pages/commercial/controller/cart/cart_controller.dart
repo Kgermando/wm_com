@@ -112,12 +112,10 @@ class CartController extends GetxController with StateMixin<List<CartModel>> {
 
 
 
-  void getList() async {
-    cartList.clear();
+  void getList() async { 
     await cartApi.getAllData(profilController.user.matricule).then((response) {
       cartList.clear();
-      cartList.addAll(response);
-      cartList.refresh();
+      cartList.addAll(response); 
       change(cartList, status: RxStatus.success());
     }, onError: (err) {
       change(null, status: RxStatus.error(err.toString()));

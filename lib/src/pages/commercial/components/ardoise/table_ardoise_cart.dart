@@ -6,7 +6,8 @@ import 'package:wm_commercial/src/models/commercial/cart_model.dart';
 import 'package:davi/davi.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:wm_commercial/src/pages/commercial/controller/ardoise/ardoise_controller.dart'; 
+import 'package:wm_commercial/src/pages/commercial/controller/ardoise/ardoise_controller.dart';
+import 'package:wm_commercial/src/pages/commercial/controller/cart/cart_controller.dart';
 import 'package:wm_commercial/src/widgets/loading.dart';
 
 class TableArdoiseCart extends StatefulWidget {
@@ -22,7 +23,8 @@ class TableArdoiseCart extends StatefulWidget {
 
 class _TableArdoiseCartState extends State<TableArdoiseCart> {
   final MonnaieStorage monnaieStorage = Get.put(MonnaieStorage());
-  final ArdoiseController controller = ArdoiseController();
+  final ArdoiseController controller = Get.put(ArdoiseController());
+  final CartController cartController = Get.find();
   DaviModel<CartModel>? _model;
   List<CartModel> cartItemList = [];
 
@@ -105,7 +107,7 @@ class _TableArdoiseCartState extends State<TableArdoiseCart> {
   }
 
   @override
-  Widget build(BuildContext context) { 
+  Widget build(BuildContext context) {
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(p10),
@@ -116,37 +118,38 @@ class _TableArdoiseCartState extends State<TableArdoiseCart> {
             columnWidthBehavior: ColumnWidthBehavior.scrollable,
             onRowDoubleTap: (data) {
               showDialog<String>(
-                  context: context,
-                  builder: (BuildContext context) => AlertDialog(
-                    title: Text('Ëtre-vous sûr de retirer cet element ?',
+                context: context,
+                builder: (BuildContext context) => AlertDialog(
+                  title: Text('Ëtre-vous sûr de retirer cet element ?',
                       style: TextStyle(color: Colors.red.shade700)),
-                    content: SizedBox(
-                      height: 100,
-                      width: 100,
-                      child: Obx(() => controller.isLoading ? loading() : const Text(
-                          'Cette action permet de supprimer ce produit de la liste.')),
-                    ) ,
-                    actions: <Widget>[
-                      TextButton(
-                        onPressed: () => Navigator.pop(context, 'Cancel'),
-                        child: Text('Annuler',
-                          style: TextStyle(color: Colors.red.shade700)),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          cartItemList
-                              .removeWhere((element) => element.created == data.created); 
-                          controller.tableInsertData(widget.ardoiseModel, cartItemList);
-                          // refresh().then((value) => Navigator.pushNamed(
-                          //   context, ComRoutes.comArdoiseDetail,
-                          //   arguments: value));
-                          // Navigator.pop(context, 'ok');
-                        },
-                        child: Text('OK',
-                          style: TextStyle(color: Colors.red.shade700)),
-                      ),
-                    ],
+                  content: SizedBox(
+                    height: 100,
+                    width: 100,
+                    child: Obx(() => controller.isLoading
+                        ? loading()
+                        : const Text(
+                            'Cette action permet de supprimer ce produit de la liste.')),
                   ),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, 'Cancel'),
+                      child: Text('Annuler',
+                          style: TextStyle(color: Colors.red.shade700)),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        cartItemList.removeWhere(
+                            (element) => element.created == data.created);
+                        controller.tableInsertData(
+                            widget.ardoiseModel, cartItemList);
+                        controller.insertDataCart(data);
+                        // Navigator.pop(context, 'ok');
+                      },
+                      child: Text('OK',
+                          style: TextStyle(color: Colors.red.shade700)),
+                    ),
+                  ],
+                ),
               );
             },
           ),
@@ -154,6 +157,4 @@ class _TableArdoiseCartState extends State<TableArdoiseCart> {
       ),
     );
   }
-
-  
 }

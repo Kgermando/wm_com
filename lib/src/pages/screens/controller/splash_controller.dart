@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:wm_commercial/src/controllers/departement_notify_controller.dart';
-import 'package:wm_commercial/src/controllers/network_controller.dart'; 
+import 'package:wm_commercial/src/controllers/network_controller.dart';
 import 'package:wm_commercial/src/pages/auth/controller/login_controller.dart';
 import 'package:wm_commercial/src/pages/auth/controller/profil_controller.dart';
 import 'package:wm_commercial/src/pages/commercial/controller/achats/achat_controller.dart';
@@ -30,7 +30,7 @@ import 'package:wm_commercial/src/pages/archives/controller/archive_controller.d
 import 'package:wm_commercial/src/pages/archives/controller/archive_folder_controller.dart';
 import 'package:wm_commercial/src/pages/auth/controller/change_password_controller.dart';
 import 'package:wm_commercial/src/pages/auth/controller/forgot_controller.dart';
-import 'package:wm_commercial/src/utils/info_system.dart';  
+import 'package:wm_commercial/src/utils/info_system.dart';
 
 class SplashController extends GetxController {
   final LoginController loginController = Get.put(LoginController());
@@ -57,14 +57,14 @@ class SplashController extends GetxController {
 
       // Archive
       Get.lazyPut(() => ArchiveFolderController());
-      Get.lazyPut(() => ArchiveController()); 
-      
+      Get.lazyPut(() => ArchiveController());
+
       // Authentification
       Get.lazyPut(() => LoginController());
       // Get.lazyPut(() => ProfilController());
       Get.lazyPut(() => ChangePasswordController());
       Get.lazyPut(() => ForgotPasswordController());
-     
+
       // Commercial
       Get.lazyPut(() => DashboardComController());
       Get.lazyPut(() => AchatController());
@@ -82,10 +82,10 @@ class SplashController extends GetxController {
       // Reservation
       Get.lazyPut(() => ReservationController());
       Get.lazyPut(() => PaiementReservationController());
- 
+
       // RH
       Get.lazyPut(() => PersonnelsController());
-      Get.lazyPut(() => UsersController()); 
+      Get.lazyPut(() => UsersController());
 
       // Update Version
       Get.lazyPut(() => UpdateController());
@@ -98,14 +98,14 @@ class SplashController extends GetxController {
 
   void isLoggIn() async {
     await loginController.authApi.getUserId().then((userData) async {
-      var departement = jsonDecode(userData.departement);
-      if (departement.first == "Commercial") {
+      // var departement = jsonDecode(userData.departement);
+      if (userData.departement == "Commercial") {
         if (int.parse(userData.role) <= 2) {
           Get.offAndToNamed(ComRoutes.comDashboard);
         } else {
           Get.offAndToNamed(ComRoutes.comVente);
         }
-      } 
+      }
     });
   }
 }

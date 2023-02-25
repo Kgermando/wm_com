@@ -92,19 +92,21 @@ class RavitaillementController extends GetxController {
           .then((value) {
         // Update stock global
         final achatModel = AchatModel(
-            idProduct: stock.idProduct,
-            quantity: qtyDisponible.toString(),
-            quantityAchat: qtyDisponible.toString(),
-            priceAchatUnit: controllerpriceAchatUnit.text,
-            prixVenteUnit: pavTVA.toString(),
-            unite: stock.unite,
-            tva: tva.toString(),
-            remise: stock.remise,
-            qtyRemise: stock.qtyRemise,
-            qtyLivre: stock.qtyLivre,
-            succursale: stock.succursale,
-            signature: profilController.user.matricule,
-            created: Timestamp.now());
+          id: stock.id,
+          idProduct: stock.idProduct,
+          quantity: qtyDisponible.toString(),
+          quantityAchat: qtyDisponible.toString(),
+          priceAchatUnit: controllerpriceAchatUnit.text,
+          prixVenteUnit: pavTVA.toString(),
+          unite: stock.unite,
+          tva: tva.toString(),
+          remise: stock.remise,
+          qtyRemise: stock.qtyRemise,
+          qtyLivre: stock.qtyLivre,
+          succursale: stock.succursale,
+          signature: profilController.user.matricule,
+          created: Timestamp.now(),
+        );
         achatController.achatApi.updateData(achatModel).then((value) {
           clear();
           achatController.getList();

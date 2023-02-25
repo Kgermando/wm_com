@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sembast/timestamp.dart';
 import 'package:wm_commercial/src/api/commerciale/ardoise_api.dart';
+import 'package:wm_commercial/src/api/commerciale/cart_api.dart';
 import 'package:wm_commercial/src/models/commercial/ardoise_model.dart';
 import 'package:wm_commercial/src/models/commercial/cart_model.dart';
 import 'package:wm_commercial/src/pages/auth/controller/profil_controller.dart';
@@ -14,6 +15,7 @@ import 'package:wm_commercial/src/routes/routes.dart';
 class ArdoiseController extends GetxController
     with StateMixin<List<ArdoiseModel>> {
   final ArdoiseApi ardoiseApi = ArdoiseApi();
+  final CartApi cartApi = CartApi();
   final CartController cartController = Get.find();
   final ProfilController profilController = Get.find();
   final FactureController factureController = Get.find();
@@ -209,6 +211,45 @@ class ArdoiseController extends GetxController
             backgroundColor: Colors.green,
             icon: const Icon(Icons.check),
             snackPosition: SnackPosition.TOP);
+        _isLoading.value = false;
+      });
+    } catch (e) {
+      _isLoading.value = false;
+      Get.snackbar("Erreur de soumission", "$e",
+          backgroundColor: Colors.red,
+          icon: const Icon(Icons.check),
+          snackPosition: SnackPosition.TOP);
+    }
+  }
+
+  // Restitution objet dans cart
+  void insertDataCart(CartModel data) async {
+    try {
+      _isLoading.value = true;
+      final cartModel = CartModel(
+        idProductCart: data.idProductCart,
+        quantityCart: data.quantityCart, // controllerQuantityCart.toString(),
+        priceCart: data.priceCart,
+        priceAchatUnit: data.priceAchatUnit,
+        unite: data.unite,
+        tva: data.tva,
+        remise: data.remise,
+        qtyRemise: data.qtyRemise,
+        succursale: data.succursale,
+        signature: data.signature,
+        created: data.created,
+        createdAt: data.createdAt,
+      );
+      await cartApi.insertData(cartModel).then((value) {
+        print("cart ${value.idProductCart}");
+        // clear();
+        // ardoiseList.clear();
+        // getList();
+        // Get.back();
+        // Get.snackbar("Rest effectuée avec succès!", "",
+        //     backgroundColor: Colors.green,
+        //     icon: const Icon(Icons.check),
+        //     snackPosition: SnackPosition.TOP);
         _isLoading.value = false;
       });
     } catch (e) {

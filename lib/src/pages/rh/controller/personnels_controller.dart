@@ -16,7 +16,7 @@ import 'package:wm_commercial/src/utils/service_affectation.dart';
 
 class PersonnelsController extends GetxController
     with StateMixin<List<AgentModel>> {
-  PersonnelsApi personnelsApi = PersonnelsApi(); 
+  PersonnelsApi personnelsApi = PersonnelsApi();
   final ProfilController profilController = Get.find();
 
   var personnelsList = <AgentModel>[].obs;
@@ -29,6 +29,7 @@ class PersonnelsController extends GetxController
   List<String> typeContratList = Dropdown().typeContrat;
   List<String> sexeList = Dropdown().sexe;
   List<String> world = Country().world;
+ 
 
   // Service d'affectation
   List<String> servAffectList = ServiceAffectation().serviceAffectationDropdown;
@@ -183,6 +184,7 @@ class PersonnelsController extends GetxController
       } else {
         numero = "$identifiant";
       }
+      // var departement = jsonEncode(["Commercial"]); 
       var detailPersonnelJson =
           jsonEncode(competanceController.document.toDelta().toJson());
       final agentModel = AgentModel(

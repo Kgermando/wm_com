@@ -2,7 +2,7 @@ import 'package:davi/davi.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:wm_commercial/src/constants/app_theme.dart';
+import 'package:wm_commercial/src/constants/app_theme.dart'; 
 import 'package:wm_commercial/src/models/users/user_model.dart';
 import 'package:wm_commercial/src/pages/rh/controller/user_actif_controller.dart';
 import 'package:wm_commercial/src/routes/routes.dart';
@@ -46,38 +46,35 @@ class _TableUserActifState extends State<TableUserActif> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(p10),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const TitleWidget(title: 'Utilisateurs actifs'),
-                IconButton(
-                    onPressed: () {
-                      setState(() {
-                        widget.usersController.getList();
-                        Navigator.pushNamed(context, RhRoutes.rhUserActif);
-                      });
-                    },
-                    icon: const Icon(Icons.refresh, color: Colors.green))
-              ],
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const TitleWidget(title: 'Utilisateurs actifs'),
+              IconButton(
+                  onPressed: () {
+                    setState(() {
+                      widget.usersController.getList();
+                      Navigator.pushNamed(context, RhRoutes.rhUserActif);
+                    });
+                  },
+                  icon: const Icon(Icons.refresh, color: Colors.green))
+            ],
+          ),
+          const SizedBox(height: p10),
+          Expanded(
+            child: Davi<UserModel>(
+              _model,
+              columnWidthBehavior: ColumnWidthBehavior.scrollable,
+              onRowTap: (row) async {
+                final UserModel updateModel =
+                    await widget.usersController.detailView(row.id!);
+                Get.toNamed(RhRoutes.rhdetailUser, arguments: updateModel);
+              },
             ),
-            const SizedBox(height: p10),
-            Expanded(
-              child: Davi<UserModel>(
-                _model,
-                columnWidthBehavior: ColumnWidthBehavior.fit,
-                onRowTap: (row) async {
-                  final UserModel updateModel =
-                      await widget.usersController.detailView(row.id!);
-                  Get.toNamed(RhRoutes.rhdetailUser, arguments: updateModel);
-                },
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

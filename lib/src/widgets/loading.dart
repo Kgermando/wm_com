@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'package:get/get.dart';
 import 'package:wm_commercial/src/constants/app_theme.dart';
 
 final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
@@ -32,9 +33,9 @@ Widget loadingError(BuildContext context, String error) => Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Expanded(
-                child: Text("$error. Merçi.",
+                child: Text("$error.",
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.headlineSmall)),
+                    style: Theme.of(context).textTheme.bodyMedium)),
           ],
         ),
         const SizedBox(
@@ -42,8 +43,7 @@ Widget loadingError(BuildContext context, String error) => Column(
         ),
         ElevatedButton(
             onPressed: () {
-              Navigator.of(context).pop();
-              Phoenix.rebirth(context);
+              Get.back();
             },
             child: Text("Revenir en arrière.",
                 textAlign: TextAlign.center,

@@ -24,7 +24,7 @@ class DrawerMenu extends GetView<DepartementNotifyCOntroller> {
         child: profilController.obx(
             onLoading: loadingDrawer(),
             onError: (error) => loadingError(context, error!), (user) {
-      List<dynamic> departementList = jsonDecode(user!.departement);
+      String departementList = user!.departement;
       int userRole = int.parse(profilController.user.role);
       return ListView(
         shrinkWrap: true,

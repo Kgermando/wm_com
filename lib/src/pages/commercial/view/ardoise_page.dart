@@ -52,40 +52,41 @@ class _ArdoisePageState extends State<ArdoisePage> {
                     onLoading: loadingPage(context),
                     onEmpty: const Text('Aucune donnée'),
                     onError: (error) => loadingError(context, error!),
-                    (state) => Padding(
-                          padding: const EdgeInsets.all(p20),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                    (state) => SingleChildScrollView(
+                      physics: const ScrollPhysics(),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
                             children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const TitleWidget(title: 'Table clients'),
-                                  IconButton(
-                                      onPressed: () {
-                                        controller.getList();
-                                        Navigator.pushNamed(context,
-                                            ComRoutes.comArdoise);
-                                      },
-                                      icon: const Icon(Icons.refresh,
-                                          color: Colors.green))
-                                ],
-                              ),
-                              Expanded(
-                                child: Wrap(
-                                  spacing: p20,
-                                  runSpacing: p20,
-                                  children:
-                                      List.generate(state!.length, (index) {
-                                    final ardoise = state[index];
-                                    return tableWidget(ardoise);
-                                  }),
-                                ),
-                              ),
+                              const TitleWidget(title: 'Table clients'),
+                              IconButton(
+                                  onPressed: () {
+                                    controller.getList();
+                                    Navigator.pushNamed(context,
+                                        ComRoutes.comArdoise);
+                                  },
+                                  icon: const Icon(Icons.refresh,
+                                      color: Colors.green))
                             ],
                           ),
-                        )))
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: p20),
+                            child: Wrap(
+                              spacing: p20,
+                              runSpacing: p20, 
+                              children:
+                                  List.generate(state!.length, (index) {
+                                final ardoise = state[index];
+                                return tableWidget(ardoise);
+                              }),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )))
           ],
         ));
   }

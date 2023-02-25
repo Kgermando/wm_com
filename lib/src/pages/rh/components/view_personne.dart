@@ -44,9 +44,8 @@ class _ViewPersonneState extends State<ViewPersonne> {
   Widget build(BuildContext context) {
     int roleUser = int.parse(widget.controller.profilController.user.role);
     return Card(
-      elevation: 3,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: p20),
+        padding: EdgeInsets.symmetric(horizontal: Responsive.isDesktop(context) ? p20 : 0.0),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -119,88 +118,88 @@ class _ViewPersonneState extends State<ViewPersonne> {
   Widget identiteWidget() {
     final bodyMedium = Theme.of(context).textTheme.bodyMedium;
     return Padding(
-      padding: const EdgeInsets.all(p10),
+      padding: EdgeInsets.all(Responsive.isDesktop(context) ? p10 : 0.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CircleAvatar(
-                      radius: 55,
-                      backgroundColor: mainColor,
-                      child: ClipOval(
-                          child: CachedNetworkImageBuilder(
-                            url: widget.personne.photo!,
-                            builder: (image) {
-                              return Center(
-                              child: Image.file(
-                                image,
-                                width: Responsive.isDesktop(context) ? 150 : 100,
-                                height: Responsive.isDesktop(context) ? 150 : 100,
-                                fit: BoxFit.cover,
-                              ));
-                            },
-                            // Optional Placeholder widget until image loaded from url
-                            placeHolder: Center(child: loading()),
-                            // Optional error widget
-                            errorWidget:
-                              Image.asset(
-                                width: Responsive.isDesktop(context) ? 150 : 100,
-                                height: Responsive.isDesktop(context) ? 150 : 100,
-                                  'assets/images/avatar.jpg'),
-                            // Optional describe your image extensions default values are; jpg, jpeg, gif and png
-                            imageExtensions: const ['jpg', 'png'],
-                          )
-                      ),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            SizedBox(
-                              height: 80,
-                              width: 80,
-                              child: SfBarcodeGenerator(
-                                value: widget.personne.matricule,
-                                symbology: QRCode(),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text('Statut personnel : ',
-                                textAlign: TextAlign.start,
-                                style: bodyMedium!
-                                    .copyWith(fontWeight: FontWeight.bold)),
-                            if (widget.personne.statutAgent == 'Actif') 
-                              Text(widget.personne.statutAgent,
-                                  textAlign: TextAlign.start,
-                                  style: bodyMedium.copyWith(
-                                      color: Colors.green.shade700)),
-                            if (widget.personne.statutAgent == 'Inactif') 
-                              Text(widget.personne.statutAgent,
-                                  textAlign: TextAlign.start,
-                                  style: bodyMedium.copyWith(
-                                      color: Colors.orange.shade700))
-                          ],
-                        ),
-                        Text(
-                            "Créé le. ${DateFormat("dd-MM-yyyy HH:mm").format(widget.personne.createdAt)}",
-                            textAlign: TextAlign.start,
-                            style: bodyMedium),
-                        Text(
-                            "Mise à jour le. ${DateFormat("dd-MM-yyyy HH:mm").format(widget.personne.created)}",
-                            textAlign: TextAlign.start,
-                            style: bodyMedium),
-                      ],
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              CircleAvatar(
+                radius: Responsive.isDesktop(context) ? 55 : 30,
+                backgroundColor: mainColor,
+                child: ClipOval(
+                    child: CachedNetworkImageBuilder(
+                      url: widget.personne.photo!,
+                      builder: (image) {
+                        return Center(
+                        child: Image.file(
+                          image,
+                          width: Responsive.isDesktop(context) ? 150 : 100,
+                          height: Responsive.isDesktop(context) ? 150 : 100,
+                          fit: BoxFit.cover,
+                        ));
+                      },
+                      // Optional Placeholder widget until image loaded from url
+                      placeHolder: Center(child: loading()),
+                      // Optional error widget
+                      errorWidget:
+                        Image.asset(
+                          width: Responsive.isDesktop(context) ? 150 : 100,
+                          height: Responsive.isDesktop(context) ? 150 : 100,
+                            'assets/images/avatar.jpg'),
+                      // Optional describe your image extensions default values are; jpg, jpeg, gif and png
+                      imageExtensions: const ['jpg', 'png'],
                     )
-                  ],
                 ),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      SizedBox(
+                        height: 80,
+                        width: 80,
+                        child: SfBarcodeGenerator(
+                          value: widget.personne.matricule,
+                          symbology: QRCode(),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text('Statut : ',
+                          textAlign: TextAlign.start,
+                          style: bodyMedium!
+                              .copyWith(fontWeight: FontWeight.bold)),
+                      if (widget.personne.statutAgent == 'Actif') 
+                        Text(widget.personne.statutAgent,
+                            textAlign: TextAlign.start,
+                            style: bodyMedium.copyWith(
+                                color: Colors.green.shade700)),
+                      if (widget.personne.statutAgent == 'Inactif') 
+                        Text(widget.personne.statutAgent,
+                            textAlign: TextAlign.start,
+                            style: bodyMedium.copyWith(
+                                color: Colors.orange.shade700))
+                    ],
+                  ),
+                  Text(
+                      "Créé le. ${DateFormat("dd-MM-yyyy HH:mm").format(widget.personne.createdAt)}",
+                      textAlign: TextAlign.start,
+                      style: bodyMedium),
+                  Text(
+                      "Mise à jour le. ${DateFormat("dd-MM-yyyy HH:mm").format(widget.personne.created)}",
+                      textAlign: TextAlign.start,
+                      style: bodyMedium),
+                ],
+              )
+            ],
+          ),
           const SizedBox(
             height: p20,
           ),

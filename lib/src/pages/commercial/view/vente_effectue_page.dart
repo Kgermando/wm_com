@@ -98,6 +98,8 @@ class _VenteEffectueState extends State<VenteEffectue> {
 
             String count =
                 (ventList.length > 9999) ? "9999+" : "${ventList.length}";
+
+            print("ventList $ventList  ");
             return Card(
               child: ExpansionTile(
                 leading: badges.Badge(

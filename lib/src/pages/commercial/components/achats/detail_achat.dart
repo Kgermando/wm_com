@@ -10,7 +10,9 @@ import 'package:wm_commercial/src/navigation/drawer/drawer_menu.dart';
 import 'package:wm_commercial/src/navigation/header/header_bar.dart';
 import 'package:wm_commercial/src/pages/auth/controller/profil_controller.dart';
 import 'package:wm_commercial/src/pages/commercial/components/achats/achat_pdf.dart';
+import 'package:wm_commercial/src/pages/commercial/components/achats/table_history_ravitaillement_produit.dart';
 import 'package:wm_commercial/src/pages/commercial/controller/achats/achat_controller.dart';
+import 'package:wm_commercial/src/pages/commercial/controller/history/history_ravitaillement_controller.dart';
 import 'package:wm_commercial/src/pages/commercial/controller/history/history_vente_controller.dart';
 import 'package:wm_commercial/src/routes/routes.dart';
 import 'package:wm_commercial/src/widgets/loading.dart';
@@ -30,6 +32,8 @@ class _DetailAchatState extends State<DetailAchat> {
   final AchatController controller = Get.find();
   final ProfilController profilController = Get.find();
   final VenteCartController venteCartController = Get.find();
+  final HistoryRavitaillementController historyRavitaillementController =
+      Get.find();
 
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
   String title = "Commercial";
@@ -124,6 +128,16 @@ class _DetailAchatState extends State<DetailAchat> {
                               ],
                             ),
                             dataWidget(profilController, state),
+                            const SizedBox(height: p20),
+                            TableHistoryRavitaillementProduit(
+                              achatModel: widget.achatModel,
+                              historyRavitaillementList:
+                                historyRavitaillementController
+                                  .historyRavitaillementList
+                                  .where((p0) =>
+                                      p0.idProduct ==
+                                      widget.achatModel.idProduct)
+                                  .toList())
                           ],
                         ),
                       )))
@@ -163,7 +177,7 @@ class _DetailAchatState extends State<DetailAchat> {
   }
 
   Widget headerTitle() {
-    final headlineMedium = Theme.of(context).textTheme.headlineMedium;
+    final headlineSmall = Theme.of(context).textTheme.headlineSmall;
     final bodyLarge = Theme.of(context).textTheme.bodyLarge;
     return SizedBox(
       width: double.infinity,
@@ -172,7 +186,7 @@ class _DetailAchatState extends State<DetailAchat> {
         padding: const EdgeInsets.all(16.0),
         child: Text(widget.achatModel.idProduct,
             style: Responsive.isDesktop(context)
-                ? headlineMedium
+                ? headlineSmall
                 : bodyLarge),
       )),
     );
@@ -217,7 +231,7 @@ class _DetailAchatState extends State<DetailAchat> {
           children: [
             Row(
               children: [
-                Text('Quantités entrant',
+                Text('Quantité entrant',
                     style: Responsive.isDesktop(context)
                         ? const TextStyle(
                             fontWeight: FontWeight.w700, fontSize: 20)
@@ -225,7 +239,7 @@ class _DetailAchatState extends State<DetailAchat> {
                     overflow: TextOverflow.ellipsis),
                 const Spacer(),
                 Text(
-                    '${NumberFormat.decimalPattern('fr').format(double.parse(double.parse(widget.achatModel.qtyLivre).toStringAsFixed(2)))} ${widget.achatModel.unite}',
+                    '${NumberFormat.decimalPattern('fr').format(double.parse(double.parse(widget.achatModel.quantityAchat).toStringAsFixed(2)))} ${widget.achatModel.unite}',
                     style: Responsive.isDesktop(context)
                         ? const TextStyle(
                             fontWeight: FontWeight.w700, fontSize: 20)

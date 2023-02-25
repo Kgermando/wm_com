@@ -14,7 +14,7 @@ class FinanceNav extends StatefulWidget {
       required this.controller});
   final String currentRoute;
   final UserModel user;
-  final List<dynamic> departementList;
+  final String departementList;
   final DepartementNotifyCOntroller controller;
 
   @override

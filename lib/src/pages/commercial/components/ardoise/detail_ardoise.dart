@@ -11,6 +11,7 @@ import 'package:wm_commercial/src/helpers/monnaire_storage.dart';
 import 'package:wm_commercial/src/models/commercial/cart_model.dart';
 import 'package:wm_commercial/src/navigation/drawer/drawer_menu.dart';
 import 'package:wm_commercial/src/navigation/header/header_bar.dart';
+import 'package:wm_commercial/src/pages/commercial/components/ardoise/bon_consommation.dart';
 import 'package:wm_commercial/src/pages/commercial/components/ardoise/table_ardoise_cart.dart';
 import 'package:wm_commercial/src/pages/commercial/controller/ardoise/ardoise_controller.dart';
 import 'package:wm_commercial/src/pages/commercial/controller/cart/cart_controller.dart';
@@ -50,12 +51,12 @@ class _DetailArdoiseState extends State<DetailArdoise> {
   }
 
   @override
-  Widget build(BuildContext context) { 
+  Widget build(BuildContext context) {
     List<dynamic> cartItem = [];
-    if (widget.ardoiseModel.ardoiseJson != "") { 
+    if (widget.ardoiseModel.ardoiseJson != "") {
       cartItem = jsonDecode(widget.ardoiseModel.ardoiseJson) as List;
     }
-   
+
     List<CartModel> cartListItem = [];
 
     for (var element in cartItem) {
@@ -103,7 +104,8 @@ class _DetailArdoiseState extends State<DetailArdoise> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     TitleWidget(
-                                        title: widget.ardoiseModel.ardoise.toUpperCase()),
+                                        title: widget.ardoiseModel.ardoise
+                                            .toUpperCase()),
                                     Column(
                                       children: [
                                         Row(
@@ -122,16 +124,17 @@ class _DetailArdoiseState extends State<DetailArdoise> {
                                             if (widget
                                                     .ardoiseModel.ardoiseJson ==
                                                 "")
-                                            editButton(),
+                                              editButton(),
                                             if (widget
                                                     .ardoiseModel.ardoiseJson ==
                                                 "")
-                                            deleteButton(),
+                                              deleteButton(),
                                           ],
                                         ),
                                         SelectableText(
                                             DateFormat("dd-MM-yy HH:mm").format(
-                                                widget.ardoiseModel.created.toDateTime()),
+                                                widget.ardoiseModel.created
+                                                    .toDateTime()),
                                             textAlign: TextAlign.start),
                                       ],
                                     )
@@ -146,21 +149,25 @@ class _DetailArdoiseState extends State<DetailArdoise> {
                           ),
                         ),
                         if (widget.ardoiseModel.ardoiseJson != "")
-                        TableArdoiseCart(
-                          cartList:
-                              jsonDecode(widget.ardoiseModel.ardoiseJson)
-                                  as List,
-                          ardoiseModel: widget.ardoiseModel,
-                        ),
+                          TableArdoiseCart(
+                            cartList:
+                                jsonDecode(widget.ardoiseModel.ardoiseJson)
+                                    as List,
+                            ardoiseModel: widget.ardoiseModel,
+                          ),
                         const SizedBox(height: p20),
                         if (widget.ardoiseModel.ardoiseJson != "") totalCart(),
-
                         const SizedBox(height: 100),
                         if (widget.ardoiseModel.ardoiseJson == "")
-                        Center(
-                          child: Icon(Icons.table_bar_outlined, color: Colors.green, size: MediaQuery.of(context).size.height / 3)),
+                          Center(
+                              child: Icon(Icons.table_bar_outlined,
+                                  color: Colors.green,
+                                  size:
+                                      MediaQuery.of(context).size.height / 3)),
                         if (widget.ardoiseModel.ardoiseJson == "")
-                        Text("${widget.ardoiseModel.ardoise} disponible", textAlign: TextAlign.center, style: Theme.of(context).textTheme.headlineSmall),
+                          Text("${widget.ardoiseModel.ardoise} disponible",
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.headlineSmall),
                       ],
                     ),
                   )))
@@ -193,9 +200,9 @@ class _DetailArdoiseState extends State<DetailArdoise> {
       }
     }
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: p30, horizontal: p10),
+      padding: const EdgeInsets.symmetric(vertical: p30, horizontal: p20),
       child: Row(
-        mainAxisAlignment: Responsive.isMobile(context) ? MainAxisAlignment.start : MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
               decoration: BoxDecoration(
@@ -231,6 +238,15 @@ class _DetailArdoiseState extends State<DetailArdoise> {
       openBackgroundColor: themeColor,
       speedDialChildren: <SpeedDialChild>[
         SpeedDialChild(
+            child: const Icon(Icons.food_bank),
+            foregroundColor: Colors.white,
+            backgroundColor: Colors.orange,
+            label: 'Bon consommation',
+            onPressed: () {
+              BonConsommationPDFA6()
+                  .generatePdf(cartListItem, monnaieStorage.monney);
+            }),
+        SpeedDialChild(
             child: const Icon(Icons.add_shopping_cart),
             foregroundColor: Colors.white,
             backgroundColor: Colors.blue,
@@ -241,7 +257,7 @@ class _DetailArdoiseState extends State<DetailArdoise> {
         SpeedDialChild(
             child: const Icon(Icons.add_shopping_cart),
             foregroundColor: Colors.white,
-            backgroundColor: Colors.orange,
+            backgroundColor: Colors.blueGrey,
             label: 'Vente à crédit',
             onPressed: () {
               newACreditDialog(cartListItem);
@@ -578,16 +594,15 @@ class _DetailArdoiseState extends State<DetailArdoise> {
           actions: <Widget>[
             TextButton(
               onPressed: () => Navigator.pop(context, 'Cancel'),
-              child: Text('Annuler',
-                  style: TextStyle(color: Colors.red.shade700)),
+              child:
+                  Text('Annuler', style: TextStyle(color: Colors.red.shade700)),
             ),
             TextButton(
               onPressed: () {
                 controller.deleteData(widget.ardoiseModel.id!);
                 Navigator.pop(context, 'ok');
               },
-              child: Text('OK',
-                  style: TextStyle(color: Colors.red.shade700)),
+              child: Text('OK', style: TextStyle(color: Colors.red.shade700)),
             ),
           ],
         ),
