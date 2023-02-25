@@ -190,6 +190,41 @@ class ArdoiseController extends GetxController
   }
 
   // Ajout des commandes à l'ardoise
+  void tableUpdateData(ArdoiseModel data, List<CartModel> cartList) async {
+    try {
+      _isLoading.value = true;
+      final jsonList = jsonEncode(cartList);
+      final dataItem = ArdoiseModel(
+        id: data.id,
+        ardoise: data.ardoise,
+        ardoiseJson: jsonList,
+        statut: 'true',
+        succursale: profilController.user.succursale,
+        signature: profilController.user.matricule,
+        created: Timestamp.now(),
+      );
+      await ardoiseApi.updateData(dataItem).then((value) {
+        clear();
+        cartController.cartList.clear();
+        ardoiseList.clear();
+        getList();
+        Get.back();
+        Get.snackbar("Ajout effectuée avec succès!", "",
+            backgroundColor: Colors.green,
+            icon: const Icon(Icons.check),
+            snackPosition: SnackPosition.TOP);
+        _isLoading.value = false;
+      });
+    } catch (e) {
+      _isLoading.value = false;
+      Get.snackbar("Erreur de soumission", "$e",
+          backgroundColor: Colors.red,
+          icon: const Icon(Icons.check),
+          snackPosition: SnackPosition.TOP);
+    }
+  }
+
+  // Ajout des commandes à l'ardoise
   void closeTable(ArdoiseModel data) async {
     try {
       _isLoading.value = true;
@@ -240,7 +275,7 @@ class ArdoiseController extends GetxController
         created: data.created,
         createdAt: data.createdAt,
       );
-      await cartApi.insertData(cartModel).then((value) {
+      await cartApi.insertData(cartModel).then((value) { 
         print("cart ${value.idProductCart}");
         // clear();
         // ardoiseList.clear();

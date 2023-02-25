@@ -140,7 +140,7 @@ class _TableArdoiseCartState extends State<TableArdoiseCart> {
                       onPressed: () {
                         cartItemList.removeWhere(
                             (element) => element.created == data.created);
-                        controller.tableInsertData(
+                        controller.tableUpdateData(
                             widget.ardoiseModel, cartItemList);
                         controller.insertDataCart(data);
                         // Navigator.pop(context, 'ok');

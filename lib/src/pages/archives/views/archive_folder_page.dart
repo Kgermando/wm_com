@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -56,21 +55,7 @@ class _ArchiveFolderPageState extends State<ArchiveFolderPage> {
                     onLoading: loadingPage(context),
                     onEmpty: const Text('Aucune donnée'),
                     onError: (error) => loadingError(context, error!), (state) {
-                  List<ArchiveFolderModel> archiveFolderList = [];
-
-                  // Profile user loggingIn
-                  List<dynamic> depList =
-                      jsonDecode(profilController.user.departement);
-                  List<String> depList1 = depList.cast<String>();
-
-                  for (var e in depList1) {
-                    archiveFolderList = state!.where((element) {
-                      List<dynamic> depArchList =
-                          jsonDecode(element.departement);
-                      List<String> depArchList1 = depArchList.cast<String>();
-                      return depArchList1.contains(e);
-                    }).toList();
-                  }
+                  
 
                   return SingleChildScrollView(
                       controller: ScrollController(),
@@ -107,8 +92,8 @@ class _ArchiveFolderPageState extends State<ArchiveFolderPage> {
                                       spacing: p20,
                                       runSpacing: p20,
                                       children: List.generate(
-                                          archiveFolderList.length, (index) {
-                                        final data = archiveFolderList[index];
+                                          state!.length, (index) {
+                                        final data = state[index];
                                         final color = listColors[
                                             index % listColors.length];
                                         return cardFolder(data, color);

@@ -77,11 +77,11 @@ class CartController extends GetxController with StateMixin<List<CartModel>> {
     getList();
   }
 
-  @override
-  void refresh() {
-    getList();
-    super.refresh();
-  }
+  // @override
+  // void refresh() {
+  //   getList();
+  //   super.refresh();
+  // }
 
 
   @override

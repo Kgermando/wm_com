@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -65,7 +63,7 @@ class _VenteItemWidgetState extends State<VenteItemWidget> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     UserModel? user = profilController.user;
-    List<dynamic> departementList = jsonDecode(user.departement);
+    String departementList = user.departement;
     bool isVisible = user.succursale == widget.achat.succursale;
 
     return Visibility(
