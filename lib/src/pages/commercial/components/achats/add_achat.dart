@@ -65,7 +65,7 @@ class _AddAchatState extends State<AddAchat> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const TitleWidget(title: "Ajout stock"),
+                                  const TitleWidget(title: "Nouveau stock"),
                                   const SizedBox(
                                     height: p10,
                                   ),

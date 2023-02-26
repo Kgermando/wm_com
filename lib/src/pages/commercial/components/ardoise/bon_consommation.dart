@@ -30,11 +30,11 @@ class BonConsommationPDFA6 extends GetxController {
         buildInvoiceInfo(cartListItem, user, monnaie),
         buildTitle(),
         buildInvoice(cartListItem, monnaie),
-        // Divider(),
+        Divider(),
         // buildTotal(cartListItem, monnaie),
-        // buildFooter()
+        buildFooter()
       ],
-      footer: (context) => buildFooter(),
+      // footer: (context) => buildFooter(),
     ));
 
     // return PdfApi.saveDocument(name: 'facture', pdf: pdf);
@@ -57,6 +57,10 @@ class BonConsommationPDFA6 extends GetxController {
     // ];
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Text(InfoSystem().nameClient(), style: const TextStyle(fontSize: p10)),
+      Text("RCCM: ${InfoSystem().rccm()}",
+          style: const TextStyle(fontSize: p8)),
+      Text("Tél.: ${InfoSystem().phone()}",
+          style: const TextStyle(fontSize: p8)),
       Text("Date: ${DateFormat("dd/MM/yy HH:mm").format(DateTime.now())}",
           style: const TextStyle(fontSize: p8)),
     ]);
@@ -79,14 +83,18 @@ class BonConsommationPDFA6 extends GetxController {
 
  
     final data = cartListItem.map((item) { 
-      var idproduit = item.idProductCart.split('-');
-
-      String produit =
-          "${idproduit.elementAt(2)} ${idproduit.elementAt(3)} ${idproduit.elementAt(4)}";
+      String produit = '';
+      if (item.idProductCart.contains('--')) {
+        produit = item.idProductCart;
+      } else if (!item.idProductCart.contains('--')) {
+        var idproduit = item.idProductCart.split('-');
+        produit =
+            "${idproduit.elementAt(2)} ${idproduit.elementAt(3)} ${idproduit.elementAt(4)}";
+      }
       return [
         (NumberFormat.decimalPattern('fr')
             .format(double.parse(item.quantityCart))),
-        produit,
+        produit
       ];
     }).toList();
 

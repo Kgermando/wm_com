@@ -40,9 +40,12 @@ class _CartPageState extends State<CartPage> {
       key: scaffoldKey,
       appBar: headerBar(context, scaffoldKey, title, subTitle),
       drawer: const DrawerMenu(),
-      floatingActionButton: (controller.cartList.isNotEmpty)
-          ? speedialWidget(controller)
-          : Container(),
+      floatingActionButton: controller.obx(
+        onLoading: loadingPage(context),
+        onEmpty: const Icon(Icons.close),
+        (state) =>
+            (state!.isNotEmpty) ? speedialWidget(controller) : Container(),
+      ),
       body: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

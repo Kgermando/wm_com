@@ -190,7 +190,7 @@ class _DetailProductModelState extends State<DetailProductModel> {
           Row(
             children: [
               Expanded(
-                child: Text('Identifiant Produit :',
+                child: Text('Identifiant :',
                     textAlign: TextAlign.start,
                     style: bodyMedium!.copyWith(fontWeight: FontWeight.bold)),
               ),
@@ -204,7 +204,7 @@ class _DetailProductModelState extends State<DetailProductModel> {
           Row(
             children: [
               Expanded(
-                child: Text('Categorie Produit :',
+                child: Text('Categorie :',
                     textAlign: TextAlign.start,
                     style: bodyMedium.copyWith(fontWeight: FontWeight.bold)),
               ),

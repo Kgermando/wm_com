@@ -11,9 +11,10 @@ import 'package:wm_commercial/src/pages/commercial/components/dashboard/courbe_v
 import 'package:wm_commercial/src/pages/commercial/components/dashboard/courbe_vente_gain_mounth.dart';
 import 'package:wm_commercial/src/pages/commercial/components/dashboard/courbe_vente_gain_year.dart';
 import 'package:wm_commercial/src/pages/commercial/controller/dashboard/dashboard_com_controller.dart';
-import 'package:wm_commercial/src/pages/commercial/controller/history/history_vente_controller.dart'; 
+import 'package:wm_commercial/src/pages/commercial/controller/history/history_vente_controller.dart';
 import 'package:wm_commercial/src/routes/routes.dart';
-import 'package:wm_commercial/src/widgets/dash_number_widget.dart'; 
+import 'package:wm_commercial/src/widgets/dash_count_widget.dart';
+import 'package:wm_commercial/src/widgets/dash_number_widget.dart';
 import 'package:wm_commercial/src/widgets/responsive_child_widget.dart';
 
 class DashboardCommPage extends StatefulWidget {
@@ -56,8 +57,7 @@ class _DashboardCommPageState extends State<DashboardCommPage> {
                       child: GetBuilder(
                           builder: (DashboardComController controller) =>
                               Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Wrap(
                                       alignment: WrapAlignment.spaceEvenly,
@@ -82,8 +82,7 @@ class _DashboardCommPageState extends State<DashboardCommPage> {
                                             color: Colors.green.shade700),
                                         DashNumberWidget(
                                             gestureTapCallback: () {
-                                              Get.toNamed(
-                                                  ComRoutes.comCreance);
+                                              Get.toNamed(ComRoutes.comCreance);
                                             },
                                             number:
                                                 '${NumberFormat.decimalPattern('fr').format(controller.sumDCreance)} ${monnaieStorage.monney}',
@@ -91,9 +90,7 @@ class _DashboardCommPageState extends State<DashboardCommPage> {
                                             icon: Icons.money_off_outlined,
                                             color: Colors.pink.shade700),
                                         DashNumberWidget(
-                                            gestureTapCallback: () {
-                                               
-                                            },
+                                            gestureTapCallback: () {},
                                             number:
                                                 '${NumberFormat.decimalPattern('fr').format(controller.soldeCaisse)} ${monnaieStorage.monney}',
                                             title: 'Solde Caisse',
@@ -113,6 +110,16 @@ class _DashboardCommPageState extends State<DashboardCommPage> {
                                             title: 'Dépenses',
                                             icon: Icons.money_off_outlined,
                                             color: Colors.red.shade700),
+                                        DashCountWidget(
+                                          title: 'Tables',
+                                            count1: controller.tableCountBusy.toString(),
+                                            count2: controller.tableCount.toString(),
+                                            icon: Icons.table_bar,
+                                            color: Colors.brown.shade700,
+                                             gestureTapCallback: () {
+                                            Get.toNamed(ComRoutes.comArdoise);
+                                          },
+                                        ), 
                                       ],
                                     ),
                                     const SizedBox(

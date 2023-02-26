@@ -276,7 +276,6 @@ class ArdoiseController extends GetxController
         createdAt: data.createdAt,
       );
       await cartApi.insertData(cartModel).then((value) { 
-        print("cart ${value.idProductCart}");
         // clear();
         // ardoiseList.clear();
         // getList();

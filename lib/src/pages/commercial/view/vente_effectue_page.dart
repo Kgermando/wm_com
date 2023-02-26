@@ -93,13 +93,11 @@ class _VenteEffectueState extends State<VenteEffectue> {
       children: produitModelController.produitModelList
           .map((e) {
             List<VenteCartModel> ventList = state
-                .where((element) => element.idProductCart == e.idProduct)
+                .where((element) => e.idProduct == element.idProductCart )
                 .toList();
 
             String count =
                 (ventList.length > 9999) ? "9999+" : "${ventList.length}";
-
-            print("ventList $ventList  ");
             return Card(
               child: ExpansionTile(
                 leading: badges.Badge(

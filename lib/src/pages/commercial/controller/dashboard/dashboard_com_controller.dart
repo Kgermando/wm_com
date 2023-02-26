@@ -7,6 +7,7 @@ import 'package:wm_commercial/src/api/commerciale/vente_gain_api.dart';
 import 'package:wm_commercial/src/models/commercial/cart_model.dart';
 import 'package:wm_commercial/src/models/commercial/courbe_vente_gain_model.dart';
 import 'package:wm_commercial/src/models/commercial/vente_chart_model.dart';
+import 'package:wm_commercial/src/pages/commercial/controller/ardoise/ardoise_controller.dart';
 import 'package:wm_commercial/src/pages/commercial/controller/factures/facture_creance_controller.dart';
 import 'package:wm_commercial/src/pages/commercial/controller/gains/gain_controller.dart';
 import 'package:wm_commercial/src/pages/commercial/controller/history/history_vente_controller.dart';
@@ -18,6 +19,8 @@ class DashboardComController extends GetxController {
   final GainCartController gainController = Get.find();
   final FactureCreanceController factureCreanceController = Get.find();
   final CaisseController caisseController = Get.put(CaisseController());
+
+  final ArdoiseController ardoiseController = Get.put(ArdoiseController());
 
   // 10 produits le plus vendu
   var venteChartList = <VenteChartModel>[].obs;
@@ -44,9 +47,14 @@ class DashboardComController extends GetxController {
   double get recetteCaisse => _recetteCaisse.value;
   final _depensesCaisse = 0.0.obs;
   double get depensesCaisse => _depensesCaisse.value;
-
   final _soldeCaisse = 0.0.obs;
   double get soldeCaisse => _soldeCaisse.value;
+
+  // Tables
+  final _tableCount = 0.obs;
+  int get tableCount => _tableCount.value;
+  final _tableCountBusy = 0.obs;
+  int get tableCountBusy => _tableCountBusy.value;
 
   Timer? timer;
 
@@ -95,6 +103,8 @@ class DashboardComController extends GetxController {
 
     var dataCaisseList = await caisseController.caisseApi.getAllData();
 
+    var ardoiseList = await ardoiseController.ardoiseApi.getAllData();
+
     venteChartList.clear();
     venteDayList.clear();
     gainDayList.clear();
@@ -113,7 +123,9 @@ class DashboardComController extends GetxController {
 
     // Gain
     var dataGain = gains
-        .where((element) => element.created.toDateTime().day == Timestamp.now().toDateTime().day)
+        .where((element) =>
+            element.created.toDateTime().day ==
+            Timestamp.now().toDateTime().day)
         .map((e) => e.sum)
         .toList();
     for (var data in dataGain) {
@@ -122,7 +134,9 @@ class DashboardComController extends GetxController {
 
     // Ventes
     var dataPriceVente = ventes
-        .where((element) => element.created.toDateTime().day == Timestamp.now().toDateTime().day)
+        .where((element) =>
+            element.created.toDateTime().day ==
+            Timestamp.now().toDateTime().day)
         .map((e) => double.parse(e.priceTotalCart))
         .toList();
     for (var data in dataPriceVente) {
@@ -164,8 +178,12 @@ class DashboardComController extends GetxController {
     for (var item in depensesCaisseList) {
       _depensesCaisse.value += double.parse(item.montantDecaissement);
     }
-
     _soldeCaisse.value = _recetteCaisse.value - _depensesCaisse.value;
+
+    // Ardoise
+    _tableCount.value = ardoiseList.length;
+    _tableCountBusy.value =
+        ardoiseList.where((element) => element.ardoiseJson != '').length;
 
     update();
   }

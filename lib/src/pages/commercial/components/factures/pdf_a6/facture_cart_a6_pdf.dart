@@ -35,9 +35,10 @@ class FactureCartPDFA6 extends GetxController {
         buildInvoice(factureCartModel, monnaie),
         Divider(),
         buildTotal(factureCartModel, monnaie),
-        // buildFooter()
+        Divider(),
+        buildFooter()
       ],
-      footer: (context) => buildFooter(),
+      // footer: (context) => buildFooter(),
     ));
 
     // return PdfApi.saveDocument(name: 'facture', pdf: pdf);
@@ -60,6 +61,10 @@ class FactureCartPDFA6 extends GetxController {
     // ];
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Text(InfoSystem().nameClient(), style: const TextStyle(fontSize: p10)),
+      Text("RCCM: ${InfoSystem().rccm()}",
+          style: const TextStyle(fontSize: p8)),
+      Text("Tél.: ${InfoSystem().phone()}",
+          style: const TextStyle(fontSize: p8)),
       Text("Facture N° ${factureCartModel.client}",
           style: const TextStyle(fontSize: p8)),
       Text(
@@ -107,9 +112,15 @@ class FactureCartPDFA6 extends GetxController {
         priceTotal +=
             double.parse(item.priceCart) * double.parse(item.quantityCart);
       }
-      var idproduit = item.idProductCart.split('-');
-      
-      String produit = "${idproduit.elementAt(2)} ${idproduit.elementAt(3)} ${idproduit.elementAt(4)}";
+
+      String produit = '';
+      if (item.idProductCart.contains('--')) {
+        produit = item.idProductCart;
+      } else if (!item.idProductCart.contains('--')) {
+        var idproduit = item.idProductCart.split('-');
+        produit =
+            "${idproduit.elementAt(2)} ${idproduit.elementAt(3)} ${idproduit.elementAt(4)}";
+      }
       return [
         (NumberFormat.decimalPattern('fr')
             .format(double.parse(item.quantityCart))),
@@ -117,7 +128,8 @@ class FactureCartPDFA6 extends GetxController {
         (double.parse(item.quantityCart) >= double.parse(item.qtyRemise))
             ? NumberFormat.decimalPattern('fr').format(double.parse(item.remise))
             : NumberFormat.decimalPattern('fr').format(double.parse(item.priceCart)),
-        (priceTotal.toStringAsFixed(2)),
+         (NumberFormat.decimalPattern('fr')
+            .format(double.parse(priceTotal.toStringAsFixed(2)))),
       ];
     }).toList();
 
@@ -171,21 +183,21 @@ class FactureCartPDFA6 extends GetxController {
         crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
         children: [
-          buildText(
-            title: 'TVA',
-            titleStyle: const TextStyle(
-              fontSize: 7,
-            ),
-            value: "16 %",
-            unite: true,
-          ),
+          // buildText(
+          //   title: 'TVA',
+          //   titleStyle: const TextStyle(
+          //     fontSize: 7,
+          //   ),
+          //   value: "16 %",
+          //   unite: true,
+          // ),
           buildText(
             title: 'Total',
             titleStyle: TextStyle(
-              fontSize: 10,
+              fontSize: 12,
               fontWeight: FontWeight.bold,
             ),
-            value: "${sumCart.toStringAsFixed(2)} $monnaie",
+            value: "${NumberFormat.decimalPattern('fr').format(double.parse(sumCart.toStringAsFixed(2)))} $monnaie",
             unite: true,
           ),
         ],

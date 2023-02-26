@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -73,15 +71,20 @@ class _DetailArchiveState extends State<DetailArchive> {
                               children: [
                                 Column(
                                   children: [
-                                    IconButton(
-                                        onPressed: () async {
-                                          refresh().then((value) =>
-                                              Navigator.pushNamed(context,
-                                                  ArchiveRoutes.archivesDetail,
-                                                  arguments: value));
-                                        },
-                                        icon: const Icon(Icons.refresh,
-                                            color: Colors.green)),
+                                    Row(
+                                      children: [
+                                        IconButton(
+                                            onPressed: () async {
+                                              refresh().then((value) =>
+                                                  Navigator.pushNamed(context,
+                                                      ArchiveRoutes.archivesDetail,
+                                                      arguments: value));
+                                            },
+                                            icon: const Icon(Icons.refresh,
+                                                color: Colors.green)),
+                                        
+                                      ],
+                                    ),
                                     SelectableText(
                                         DateFormat("dd-MM-yyyy HH:mm").format(
                                             widget.archiveModel.created),
@@ -105,8 +108,7 @@ class _DetailArchiveState extends State<DetailArchive> {
   Widget dataWidget() {
     final bodyMedium = Theme.of(context).textTheme.bodyMedium;
     int roleUser = int.parse(profilController.user.role);
-    var departementList = jsonDecode(widget.archiveModel.departement);
-    String departement = departementList.first;
+    String departement = widget.archiveModel.departement;
     int level = int.parse(widget.archiveModel.level);
     return Padding(
       padding: const EdgeInsets.all(p10),
@@ -177,6 +179,35 @@ class _DetailArchiveState extends State<DetailArchive> {
               child2: SelectableText(widget.archiveModel.signature,
                   textAlign: TextAlign.start, style: bodyMedium))
         ],
+      ),
+    );
+  }
+
+  Widget editButton() {
+    return IconButton(
+      icon: Icon(Icons.edit, color: Colors.purple.shade700),
+      tooltip: "Modification",
+      onPressed: () => showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: Text('Etes-vous sûr de modifier ceci?',
+              style: TextStyle(color: mainColor)),
+          content: const Text('Cette action permet de modifier ce document.'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'Cancel'),
+              child: const Text('Annuler'),
+            ),
+            TextButton(
+              onPressed: () {
+                Get.toNamed(ArchiveRoutes.archivesDetail,
+                    arguments: widget.archiveModel);
+                // Navigator.pop(context);
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        ),
       ),
     );
   }

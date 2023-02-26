@@ -12,15 +12,15 @@ class InfoSystem {
       "No 163 avenue Kasai, Gombe, Q/ Gard - RDC";
   String logoClient() => "assets/images/logo.png";
   String prefix() => "IV";
-  String rccm() => "-";
-  String nImpot() => "-";
+  String rccm() => "20-A-02375";
+  String nImpot() => "A2150314N";
   String iDNat() => "-";
   String email() => "-";
-  String phone() => "+243 84 719 04 82";
-
+  String phone() => "+243 99 150 93 03";
+   
   String date() => "25-02-2023";
 
- 
+  
 
 //  Local Storage
   static const keyUser = 'userModelIvanna';

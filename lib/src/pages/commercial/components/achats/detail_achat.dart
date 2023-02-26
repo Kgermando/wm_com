@@ -128,7 +128,7 @@ class _DetailAchatState extends State<DetailAchat> {
                               ],
                             ),
                             dataWidget(profilController, state),
-                            const SizedBox(height: p20),
+                            // const SizedBox(height: p20),
                             TableHistoryRavitaillementProduit(
                               achatModel: widget.achatModel,
                               historyRavitaillementList:
@@ -137,7 +137,8 @@ class _DetailAchatState extends State<DetailAchat> {
                                   .where((p0) =>
                                       p0.idProduct ==
                                       widget.achatModel.idProduct)
-                                  .toList())
+                                  .toList()),
+                            const SizedBox(height: p20),
                           ],
                         ),
                       )))

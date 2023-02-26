@@ -43,7 +43,7 @@ class _TableHistoryRavitaillementProduitState
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 300,
+      height: 400,
       child: PlutoGrid(
         columns: columns,
         rows: rows,

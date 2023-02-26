@@ -25,7 +25,6 @@ class VenteEffectueController extends GetxController
   }
 
   void getList() async {
-    venteCartList.clear();
     await venteCartApi.getAllData().then((response) {
       venteCartList.clear();
       venteCartList.addAll(response);

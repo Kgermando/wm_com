@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:wm_commercial/src/constants/app_theme.dart';
@@ -23,19 +21,16 @@ class MailNav extends GetView<DepartementNotifyCOntroller> {
         children: [
           const SizedBox(height: p20),
           DrawerWidget(
-              selected: pageCurrente == MailRoutes.mails,
-              icon: Icons.inbox,
+              selected: pageCurrente == ComRoutes.comVente,
+              icon: Icons.menu,
               sizeIcon: 20.0,
               title: 'Menu',
               style: bodySmall!,
-              onTap: () {
-                // var departement = jsonDecode(profilController.user.departement);
-                if (profilController.user.departement == "Commercial") {
-                  if (int.parse(profilController.user.role) <= 2) {
-                    Get.offAndToNamed(ComRoutes.comDashboard);
-                  } else {
-                    Get.offAndToNamed(ComRoutes.comVente);
-                  }
+              onTap: () { 
+                if (int.parse(profilController.user.role) <= 2) {
+                  Get.offAndToNamed(ComRoutes.comDashboard);
+                } else {
+                  Get.offAndToNamed(ComRoutes.comVente);
                 }
               }),
           DrawerWidget(

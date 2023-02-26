@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -119,8 +117,7 @@ class _TableArchiveState extends State<TableArchive> {
     var i = dataItemList.length;
     List.generate(dataItemList.length, (index) {
       var item = dataItemList[index];
-      var departementList = jsonDecode(item.departement);
-      String departement = departementList.first;
+      String departement = item.departement;
       return rows.add(PlutoRow(cells: {
         'numero': PlutoCell(value: i--),
         'nomDocument': PlutoCell(value: item.nomDocument),

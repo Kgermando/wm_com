@@ -8,7 +8,6 @@ import 'package:wm_commercial/src/models/rh/agent_model.dart';
 import 'package:wm_commercial/src/navigation/drawer/drawer_menu.dart';
 import 'package:wm_commercial/src/navigation/header/header_bar.dart'; 
 import 'package:wm_commercial/src/pages/auth/controller/profil_controller.dart';
-import 'package:wm_commercial/src/pages/rh/components/infos_personne.dart';
 import 'package:wm_commercial/src/pages/rh/components/view_personne.dart';
 import 'package:wm_commercial/src/pages/rh/controller/personnels_controller.dart';
 import 'package:wm_commercial/src/pages/rh/controller/user_actif_controller.dart'; 
